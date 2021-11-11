@@ -1,0 +1,38 @@
+﻿{
+  "AllowedHosts": "*",
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File" ],
+    "MinimumLevel": "Information",
+    "Enrich": [
+      "FromLogContext",
+      "WithMachineName",
+      "WithProcessId",
+      "WithThreadId",
+      "WithExceptionDetails"
+    ],
+    "Properties": {
+      "ApplicationName": "BreakingBadApi"
+    },
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "./Logging/log.txt",
+          "rollingInterval": "Day",
+          "outputTemplate": "{Timestamp} {Message}{NewLine:1}{Exception:1}"
+        }
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "./Logging/log.json",
+          "rollingInterval": "Day",
+          "formatter": "Serilog.Formatting.Json.JsonFormatter, Serilog"
+        }
+      }
+    ]
+  }
+}

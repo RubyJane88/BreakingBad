@@ -19,16 +19,17 @@ namespace BreakingBad.API.Repositories
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Character>> GetAllCharactersAsync()
+        public async Task<IEnumerable<CharacterDto>> GetAllCharactersAsync()
         {
             try
             {
                 var characters = await _context
                                                         .Characters
-                                                        .Include(c => c.Occupation)
-                                                        .ToListAsync();
 
-                return characters;
+                                                        .ToListAsync();
+                var characterDtos = _mapper.Map<IEnumerable<CharacterDto>>(characters);
+
+                return characterDtos;
 
             }
             catch (Exception e)

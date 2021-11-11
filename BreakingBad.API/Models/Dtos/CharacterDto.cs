@@ -1,6 +1,6 @@
 ﻿namespace BreakingBad.API.Models.Dtos
 {
-    public class CharacterDto
+    public sealed class CharacterDto
     {
         public int CharId { get; set; }
         public string Name { get; set; }
@@ -11,8 +11,8 @@
 
         public Category Category { get; set; }
 
-        public List<int> Appearance { get; set; }
-        public List<int> BetterCallSaulAppearance { get; set; }
+        // public List<int>? Appearance { get; set; }
+        // public List<int> BetterCallSaulAppearance { get; set; }
         public List<string> Occupation { get; set; }
     }
 

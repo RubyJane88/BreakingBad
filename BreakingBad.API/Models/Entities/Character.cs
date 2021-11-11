@@ -14,9 +14,11 @@ namespace BreakingBad.API.Models.Entities
 
         public Category Category { get; set; }
 
-        public List<int> Appearance { get; set; }
-        public List<int> BetterCallSaulAppearance { get; set; }
-        public List<string> Occupation { get; set; }
+        // public List<int> Appearance { get; set; }
+        // public List<int> BetterCallSaulAppearance { get; set; }
+
+        // [NotMapped]
+        public IEnumerable<string> Occupation { get; set; } = new List<string>();
     }
 
     public enum Category

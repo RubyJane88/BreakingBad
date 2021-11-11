@@ -9,8 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 
+
+/* EF Core DbContext */
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
-    opt.UseInMemoryDatabase("InMemoryDb"));
+    opt.UseSqlServer(builder.Configuration["MSSQLServer:ConnectionString"]));
+
+//In Memory 
+// builder.Services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("InMemoryDb"));
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -20,7 +26,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Breaking Bad", Version = "v1" });
 });
 
-//Automapper for mapping Entities to Dtos 
+//Automapper for mapping Entities to Dtos -
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // //CORS
@@ -74,9 +80,6 @@ app.UseRouting();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-
-
 
 
 app.MapControllers();

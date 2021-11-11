@@ -6,7 +6,7 @@ namespace BreakingBad.API.Contracts
     public interface ICharacterRepository
     {
 
-        Task<IEnumerable<Character>> GetAllCharactersAsync();
+        Task<IEnumerable<CharacterDto>> GetAllCharactersAsync();
 
         Task<CharacterDto> GetCharacterByIdAsync(int Id);
 
