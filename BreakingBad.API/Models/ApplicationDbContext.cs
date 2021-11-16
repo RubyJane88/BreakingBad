@@ -6,8 +6,8 @@ namespace BreakingBad.API.Models;
 
 public class ApplicationDbContext : DbContext
 {
-    public DbSet<Character> Characters { get; set; }
-
+    // public DbSet<Character> Characters { get; set; }
+    public DbSet<Character> Characters => Set<Character>();
 
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -15,13 +15,34 @@ public class ApplicationDbContext : DbContext
 
     }
 
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Orders");
+
+    //Make all properties of max length, no need to specify for each property unless necessary
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<string>().HaveMaxLength(200);
+
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //modelBuilder.Entity<Character>().Property(e => e.Name).HasMaxLength(200);
 
-        var splitStringConverter = new ValueConverter<IEnumerable<string>, string>(v => string.Join(";", v)
+
+        var splitOccupationStringConverter = new ValueConverter<IEnumerable<string>, string>(v => string.Join(";", v)
             , v => v.Split(new[] { ';' }));
+        modelBuilder.Entity<Character>().Property(nameof(Character.Occupation)).HasConversion(splitOccupationStringConverter);
 
-        modelBuilder.Entity<Character>().Property(nameof(Character.Occupation)).HasConversion(splitStringConverter);
+
+        var splitAppearanceStringConverter = new ValueConverter<IEnumerable<string>, string>(v => string.Join(";", v)
+            , v => v.Split(new[] { ';' }));
+        modelBuilder.Entity<Character>().Property(nameof(Character.Appearance)).HasConversion(splitAppearanceStringConverter);
+
+
+        var splitBetterCallSaulAppearanceStringConverter = new ValueConverter<IEnumerable<string>, string>(v => string.Join(";", v)
+            , v => v.Split(new[] { ';' }));
+        modelBuilder.Entity<Character>().Property(nameof(Character.BetterCallSaulAppearance)).HasConversion(splitBetterCallSaulAppearanceStringConverter);
+
 
 
         modelBuilder.Entity<Character>().HasData(
@@ -33,14 +54,17 @@ public class ApplicationDbContext : DbContext
                 Name = "Jessie Pinkman",
                 Birthday = new DateTime(1984, 09, 29),
                 Occupation = new List<string>() { "Meth dealer" },
+
                 Img = new Uri(
                     "https://vignette.wikia.nocookie.net/breakingbad/images/9/95/JesseS5.jpg/revision/latest?cb=20120620012441"),
                 Nickname = "Cap n' Cook",
+                Appearance = new List<string>() { "Breaking Bad" },
                 Portrayed = "Aaron Paul",
-                Category = Category.BreakingBad,
-
+                Category = "Breaking Bad",
+                BetterCallSaulAppearance = new List<string>() { "None" },
             }
-            );
+
+        );
 
         base.OnModelCreating(modelBuilder);
     }

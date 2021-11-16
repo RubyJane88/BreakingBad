@@ -5,17 +5,16 @@ namespace BreakingBad.API.Contracts
 {
     public interface ICharacterRepository
     {
-
         Task<IEnumerable<CharacterDto>> GetAllCharactersAsync();
 
-        Task<CharacterDto> GetCharacterByIdAsync(int Id);
+        Task<CharacterDto> GetCharacterByIdAsync(int charId);
 
         Task<CharacterDto> CreateCharacterAsync(Character character);
 
         Task<CharacterDto> UpdateCharacterAsync(Character character);
 
-        Task DeleteCharacterAsync(int Id);
+        Task DeleteCharacterAsync(int charId);
 
-        Task<bool> ExistsAsync(string name);
+        Task<bool> ExistsAsync(int charId);
     }
 }

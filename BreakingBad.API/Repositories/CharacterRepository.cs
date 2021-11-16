@@ -30,7 +30,6 @@ namespace BreakingBad.API.Repositories
                 var characterDtos = _mapper.Map<IEnumerable<CharacterDto>>(characters);
 
                 return characterDtos;
-
             }
             catch (Exception e)
             {
@@ -39,29 +38,73 @@ namespace BreakingBad.API.Repositories
             }
         }
 
-        public async Task<CharacterDto> GetCharacterByIdAsync(int Id)
+        public async Task<CharacterDto> GetCharacterByIdAsync(int charId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var character = await _context.Characters.FindAsync(charId);
+                var characterDto = _mapper.Map<CharacterDto>(character);
+                return characterDto;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception("Error getting character with that id");
+            }
         }
 
         public async Task<CharacterDto> CreateCharacterAsync(Character character)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Characters.Add(character);
+                await _context.SaveChangesAsync();
+
+                var characterDto = _mapper.Map<CharacterDto>(character);
+                return characterDto;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception("Error creating a new breaking bad character");
+            }
+        }
+
+        public async Task DeleteCharacterAsync(int charId)
+        {
+            try
+            {
+                var exists = await ExistsAsync(charId);
+                if (!exists) throw new Exception("Not Found");
+
+                _context.Remove(await _context.Characters.FindAsync(charId));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception("Error deleting character item");
+            }
         }
 
         public async Task<CharacterDto> UpdateCharacterAsync(Character character)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var exists = await ExistsAsync(character.CharId);
+                if (!exists) throw new Exception("Not Found");
+
+                _context.Update(character);
+                await _context.SaveChangesAsync();
+                var characterDto = _mapper.Map<CharacterDto>(character);
+                return characterDto;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception("Error updating the character item");
+            }
         }
 
-        public async Task DeleteCharacterAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> ExistsAsync(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<bool> ExistsAsync(int charId) => await _context.Characters.AnyAsync(c => c.CharId == charId);
     }
 }

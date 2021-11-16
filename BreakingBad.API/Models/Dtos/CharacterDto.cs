@@ -9,17 +9,14 @@
         public string Nickname { get; set; }
         public string Portrayed { get; set; }
 
-        public Category Category { get; set; }
+        public string Category { get; set; }
 
-        // public List<int>? Appearance { get; set; }
-        // public List<int> BetterCallSaulAppearance { get; set; }
-        public List<string> Occupation { get; set; }
+        public IEnumerable<string> Appearance { get; set; }
+
+        public IEnumerable<string> BetterCallSaulAppearance { get; set; }
+
+        public IEnumerable<string> Occupation { get; set; }
     }
 
-    public enum Category
-    {
-        BetterCallSaul,
-        BreakingBad,
-        BreakingBadBetterCallSaul
-    };
+
 }
