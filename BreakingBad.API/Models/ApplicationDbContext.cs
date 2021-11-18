@@ -11,6 +11,8 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Episode> Episodes => Set<Episode>();
 
+    public DbSet<Quote> Quotes => Set<Quote>();
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }

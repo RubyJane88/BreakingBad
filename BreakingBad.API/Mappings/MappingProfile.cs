@@ -10,6 +10,7 @@ namespace BreakingBad.API.Mappings
         {
             CreateMap<Character, CharacterDto>().ReverseMap();
             CreateMap<Episode, EpisodeDto>().ReverseMap();
+            CreateMap<Quote, QuoteDto>().ReverseMap();
         }
     }
 }
