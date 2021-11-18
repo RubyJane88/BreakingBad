@@ -17,6 +17,4 @@
 
         public IEnumerable<string> Occupation { get; set; }
     }
-
-
 }

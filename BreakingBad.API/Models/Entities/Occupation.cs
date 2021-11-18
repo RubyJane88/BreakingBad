@@ -2,10 +2,27 @@
 {
     public class Occupation
     {
-        public int Id { get; set; }
-        public string ChemistryTeacher { get; }
-        public string MethDealer { get; set; }
+        private string[] occupation;
 
-        public string Housewife { get; set; }
+        public Occupation(string[] occupation)
+        {
+            this.occupation = occupation;
+            occupation = new string[]
+            {
+                "High School Chemistry Teacher",
+                "Meth King Pin",
+                "Meth Dealer",
+                "House wife",
+                "Book Keeper",
+                "Car Wash Manager",
+                "Taxi Dispatcher",
+                "DEA Agent",
+                "Lawyer",
+                "Clepto",
+                "Hitman",
+                "Private Investigator",
+                "Ex-Cop"
+            };
+        }
     }
 }

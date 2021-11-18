@@ -5,19 +5,14 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddControllers();
-
-
 
 /* EF Core DbContext */
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration["MSSQLServer:ConnectionString"]));
 
-//In Memory 
+//In Memory
 // builder.Services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("InMemoryDb"));
-
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -32,7 +27,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // //CORS
 builder.Services.AddCors();
 
-// //Health Checks 
+// //Health Checks
 builder.Services.AddHealthChecks();
 
 /* Scrutor */
@@ -41,19 +36,14 @@ builder.Services.Scan(scan =>
         .AddClasses()
         .AsMatchingInterface());
 
-
 /* auto map from interface to service because of scrutor e.g.
            from services.AddScoped<IPerson, Person>
            to services.AddScoped<Person> only */
 builder.Services.AddScoped<CharacterRepository>();
-
-
-
+builder.Services.AddScoped<EpisodeRepository>();
 
 // This method gets called by the runtime.
 // Use this method to configure the HTTP request pipeline.
-
-
 
 var app = builder.Build();
 
@@ -64,8 +54,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Breaking Bad v1"));
 }
 
-
-
 /* CORS Policy */
 app.UseCors(b =>
 {
@@ -74,13 +62,11 @@ app.UseCors(b =>
     b.AllowAnyMethod();
 });
 
-
 app.UseRouting();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 

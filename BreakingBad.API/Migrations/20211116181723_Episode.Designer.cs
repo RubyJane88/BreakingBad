@@ -4,6 +4,7 @@ using BreakingBad.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreakingBad.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211116181723_Episode")]
+    partial class Episode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,10 +105,6 @@ namespace BreakingBad.API.Migrations
                     b.Property<int>("Episodes")
                         .HasColumnType("int");
 
-                    b.Property<string>("Season")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
                     b.Property<string>("Series")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -120,17 +118,6 @@ namespace BreakingBad.API.Migrations
                     b.HasKey("EpisodeId");
 
                     b.ToTable("Episodes");
-
-                    b.HasData(
-                        new
-                        {
-                            EpisodeId = 60,
-                            AirDate = new DateTime(2008, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Episodes = 14,
-                            Season = "5",
-                            Series = "1",
-                            Title = "Ozymandias"
-                        });
                 });
 #pragma warning restore 612, 618
         }

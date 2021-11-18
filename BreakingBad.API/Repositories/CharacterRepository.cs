@@ -12,11 +12,13 @@ namespace BreakingBad.API.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly LinkGenerator _linkGenerator;
 
-        public CharacterRepository(ApplicationDbContext context, IMapper mapper)
+        public CharacterRepository(ApplicationDbContext context, IMapper mapper, LinkGenerator linkGenerator)
         {
             _context = context;
             _mapper = mapper;
+            _linkGenerator = linkGenerator;
         }
 
         public async Task<IEnumerable<CharacterDto>> GetAllCharactersAsync()

@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BreakingBad.API.Controllers
 {
-    [Route("api/characters")]
     [ApiController]
+    [Route("api/characters")]
     public class CharactersController : ControllerBase
     {
         private readonly ICharacterRepository _repo;
