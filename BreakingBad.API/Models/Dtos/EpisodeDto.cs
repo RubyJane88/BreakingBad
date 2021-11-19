@@ -10,10 +10,7 @@
 
         public string Season { get; set; }
 
-        // public Character CharacterId { get; set; }
-        //
-        // public List<Characters> Characters { get; set; } = new List<Characters>();
-
+        public IEnumerable<string> Characters { get; set; } = new List<string>();
         public int Episodes { get; set; }
 
         public string Series { get; set; }

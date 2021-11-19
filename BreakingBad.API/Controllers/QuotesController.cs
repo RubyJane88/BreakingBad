@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using BreakingBad.API.Contracts;
 using BreakingBad.API.Models;
 using BreakingBad.API.Models.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BreakingBad.API.Controllers
 {
@@ -15,10 +11,12 @@ namespace BreakingBad.API.Controllers
     public class QuotesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IQuoteRepository _repo;
 
-        public QuotesController(ApplicationDbContext context)
+        public QuotesController(ApplicationDbContext context, IQuoteRepository repo)
         {
             _context = context;
+            _repo = repo;
         }
 
         // GET: api/Quotes

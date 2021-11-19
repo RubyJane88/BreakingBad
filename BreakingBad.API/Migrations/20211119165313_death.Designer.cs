@@ -4,6 +4,7 @@ using BreakingBad.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreakingBad.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211119165313_death")]
+    partial class death
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,41 +131,6 @@ namespace BreakingBad.API.Migrations
                     b.HasKey("DeathId");
 
                     b.ToTable("Deaths");
-
-                    b.HasData(
-                        new
-                        {
-                            DeathId = 40,
-                            Cause = "Multiple gunshots.",
-                            Deaths = "Bodyguards of Gus Fring",
-                            Episode = 13,
-                            LastWords = "What, you got a problem with stairs?",
-                            NumberOfDeaths = 2,
-                            Responsible = "Walter White",
-                            Season = 4
-                        },
-                        new
-                        {
-                            DeathId = 28,
-                            Cause = "Shot in close range.",
-                            Deaths = "Cartel Assassins",
-                            Episode = 4,
-                            LastWords = "Unknown",
-                            NumberOfDeaths = 2,
-                            Responsible = "Mike Ehrmantraut",
-                            Season = 4
-                        },
-                        new
-                        {
-                            DeathId = 23,
-                            Cause = "Ran over with a van, then shot in the head.",
-                            Deaths = "Rival Dealers",
-                            Episode = 12,
-                            LastWords = "Unknown",
-                            NumberOfDeaths = 2,
-                            Responsible = "Walter White",
-                            Season = 3
-                        });
                 });
 
             modelBuilder.Entity("BreakingBad.API.Models.Entities.Episode", b =>
@@ -176,10 +143,6 @@ namespace BreakingBad.API.Migrations
 
                     b.Property<DateTime>("AirDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Characters")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Episodes")
                         .HasColumnType("int");
@@ -205,23 +168,12 @@ namespace BreakingBad.API.Migrations
                     b.HasData(
                         new
                         {
-                            EpisodeId = 27,
+                            EpisodeId = 60,
                             AirDate = new DateTime(2008, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Characters = "Walter White;Hank Schrader",
                             Episodes = 14,
                             Season = "5",
                             Series = "1",
                             Title = "Ozymandias"
-                        },
-                        new
-                        {
-                            EpisodeId = 6,
-                            AirDate = new DateTime(2008, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Characters = "Walter White;Jesse Pinkman;Skyler White;Hank Schrader;Marie Schrader;Walter White Jr.;Tuco Salamanca",
-                            Episodes = 6,
-                            Season = "1",
-                            Series = "Breaking Bad",
-                            Title = "Crazy Handful of Nothin"
                         });
                 });
 

@@ -4,6 +4,7 @@ using BreakingBad.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreakingBad.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211119221445_seedEpisodeCharacters")]
+    partial class seedEpisodeCharacters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,23 +207,13 @@ namespace BreakingBad.API.Migrations
                     b.HasData(
                         new
                         {
-                            EpisodeId = 27,
+                            EpisodeId = 60,
                             AirDate = new DateTime(2008, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Characters = "Walter White;Hank Schrader",
                             Episodes = 14,
                             Season = "5",
                             Series = "1",
                             Title = "Ozymandias"
-                        },
-                        new
-                        {
-                            EpisodeId = 6,
-                            AirDate = new DateTime(2008, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Characters = "Walter White;Jesse Pinkman;Skyler White;Hank Schrader;Marie Schrader;Walter White Jr.;Tuco Salamanca",
-                            Episodes = 6,
-                            Season = "1",
-                            Series = "Breaking Bad",
-                            Title = "Crazy Handful of Nothin"
                         });
                 });
 

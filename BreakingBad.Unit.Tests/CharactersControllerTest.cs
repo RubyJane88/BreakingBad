@@ -29,7 +29,7 @@ namespace BreakingBad.Unit.Tests
         public async Task GetCharactersTest()
         {
             //arrange
-            var mockCharacterDtos = MockData.GetAllCharacters();
+            var mockCharacterDtos = MockCharacterData.GetAllCharacters();
             _mockRepo.Setup(repository => repository.GetAllCharactersAsync())
                 .Returns(Task.FromResult(mockCharacterDtos));
 
@@ -53,7 +53,7 @@ namespace BreakingBad.Unit.Tests
         {
             //arrange
             var validCharacterId = validCharId;
-            var mockCharacterDto = MockData.GetAllCharacters().FirstOrDefault(c => c.CharId == validCharId);
+            var mockCharacterDto = MockCharacterData.GetAllCharacters().FirstOrDefault(c => c.CharId == validCharId);
 
             _mockRepo.Setup(repository => repository.GetCharacterByIdAsync(validCharacterId))
                 .Returns(Task.FromResult(mockCharacterDto));
@@ -73,7 +73,7 @@ namespace BreakingBad.Unit.Tests
             //arrange
 
             var invalidCharacterId = invalidCharId;
-            var mockInvalidCharacterDto = MockData.GetAllCharacters().FirstOrDefault(c => c.CharId == invalidCharId);
+            var mockInvalidCharacterDto = MockCharacterData.GetAllCharacters().FirstOrDefault(c => c.CharId == invalidCharId);
 
             _mockRepo.Setup(repository => repository.GetCharacterByIdAsync(invalidCharacterId))
                 .Returns(Task.FromResult(mockInvalidCharacterDto));
@@ -94,7 +94,7 @@ namespace BreakingBad.Unit.Tests
         public async Task DeleteCharacterTest(int charId)
         {
             //arrange
-            var mockCharacterDtos = MockData.GetAllCharacters();
+            var mockCharacterDtos = MockCharacterData.GetAllCharacters();
             _mockRepo.Setup(repository => repository.GetAllCharactersAsync())
                 .Returns(Task.FromResult(mockCharacterDtos));
 
@@ -115,7 +115,7 @@ namespace BreakingBad.Unit.Tests
         public async Task PostCharacterTest()
         {
             //arrange
-            var mockCharacterDto = MockData.GetOneCharacterDto();
+            var mockCharacterDto = MockCharacterData.GetOneCharacterDto();
             var newCharacter = new Character
             {
                 CharId = 8,
@@ -147,15 +147,15 @@ namespace BreakingBad.Unit.Tests
             //Fluent Assertions version
             characterDto.Should().NotBeNull();
             response.StatusCode.Should().Be(200);
-            characterDto.Equals(characterDto);
+            characterDto.CharId.Equals(newCharacter.CharId);
         }
 
         [Fact]
         public async Task PutCharacterTest()
         {
             //arrange
-            var mockCharacter = MockData.GetOneCharacter();
-            var mockCharacterDto = MockData.GetOneCharacterDto();
+            var mockCharacter = MockCharacterData.GetOneCharacter();
+            var mockCharacterDto = MockCharacterData.GetOneCharacterDto();
 
             _mockRepo.Setup(repository => repository.UpdateCharacterAsync(mockCharacter))
                 .Returns(Task.FromResult(mockCharacterDto));

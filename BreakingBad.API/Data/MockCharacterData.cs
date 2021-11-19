@@ -3,7 +3,7 @@ using BreakingBad.API.Models.Entities;
 
 namespace BreakingBad.API.Data
 {
-    public static class MockData
+    public static class MockCharacterData
     {
         public static IEnumerable<CharacterDto> GetAllCharacters()
         {

@@ -13,8 +13,7 @@ namespace BreakingBad.API.Models.Entities
 
         public DateTime AirDate { get; set; }
 
-        // public Character CharacterId { get; set; }
-        // public List<Characters> Characters { get; set; }
+        public IEnumerable<string> Characters { get; set; } = new List<string>();
 
         public int Episodes { get; set; }
 
